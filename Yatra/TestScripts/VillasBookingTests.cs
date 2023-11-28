@@ -64,6 +64,9 @@ namespace Yatra.TestScripts
             VillasPage.ClickRemoveAdultButton();
             var searchResultPage=VillasPage.clickSearchVillas();
             Assert.That(driver.Url.Contains("homestay-search"));
+            Thread.Sleep(1000);
+            searchResultPage.ClickFilterPropertyType();
+            Thread.Sleep(1000);
 
                 
             }

@@ -43,15 +43,15 @@ namespace Yatra.PageObjects
             fluentWait.Message = "Element not found";
 
             City.Click();
-            //Thread.Sleep(1000);
+            Thread.Sleep(1000);
 
-            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromMicroseconds(1000));
+           // WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromMicroseconds(1000));
             City.Clear();
-            //WebDriverWait wait1= new WebDriverWait(driver, TimeSpan.FromMicroseconds(1000));
+            //WebDriverWait wait1= new WebDriverWait(driver, TimeSpan.FromMicroseconds(1500));
             City.SendKeys(city);
 
-            //fluentWait.Until(c => City.Displayed);
-            WebDriverWait wait1 = new WebDriverWait(driver, TimeSpan.FromMicroseconds(1000));
+            fluentWait.Until(c => City.Displayed);
+            //WebDriverWait wait2 = new WebDriverWait(driver, TimeSpan.FromMicroseconds(1200));
 
             City.SendKeys(Keys.Enter);
            
@@ -74,7 +74,7 @@ namespace Yatra.PageObjects
         public SearchResultPage clickSearchVillas()
         {
             searchvillasButton.Click();
-            return new SearchResultPage(); ;
+            return new SearchResultPage(driver); ;
         }
        
 
