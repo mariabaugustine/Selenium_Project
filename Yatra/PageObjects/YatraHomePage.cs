@@ -19,9 +19,10 @@ namespace Yatra.PageObjects
         }
         [FindsBy(How =How.Id,Using = "booking_engine_homestays")]
         private IWebElement villasIcon {  get; set; }
-        public void ClickVillasIcon()
+        public VillasBookingPage ClickVillasIcon()
         {
             villasIcon.Click();
+            return new VillasBookingPage(driver);
         }
     }
 }
