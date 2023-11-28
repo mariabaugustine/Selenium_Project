@@ -46,7 +46,7 @@ namespace Yatra.TestScripts
                 string? city = excelData?.City;
                 Console.WriteLine($"City: {city}");
                 VillasPage.TypeCity(excelData.City);
-                Thread.Sleep(2000);
+               Thread.Sleep(2000);
                 
 
                 IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
@@ -58,9 +58,9 @@ namespace Yatra.TestScripts
 
 
             }
-           // fluentWait.Timeout=TimeSpan.FromSeconds(1000);
+           
             VillasPage.ClickAddButton();
-            //fluentWait.Timeout = TimeSpan.FromSeconds(1000);
+            
             VillasPage.ClickRemoveAdultButton();
             var searchResultPage=VillasPage.clickSearchVillas();
             Assert.That(driver.Url.Contains("homestay-search"));

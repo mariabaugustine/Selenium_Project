@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Yatra.PageObjects
 {
-    internal class VillasBookingPage
+    internal class VillasBookingPage 
     {
         IWebDriver driver;
 
@@ -20,7 +20,7 @@ namespace Yatra.PageObjects
             PageFactory.InitElements(driver, this);
         }
         [FindsBy(How =How.Id,Using =("BE_hotel_destination_city"))]
-        private IWebElement City { get; set; }
+        public IWebElement City { get; set; }
 
         [FindsBy(How=How.XPath,Using = "//input[@id='BE_hotel_checkin_date']//following::p[1]")]
         public IWebElement CheckIN { get; set; }
@@ -36,12 +36,24 @@ namespace Yatra.PageObjects
 
         public void TypeCity(string city)
         {
-            
-            
-                City.Click();
-                Thread.Sleep(1000);
-                City.SendKeys(city);
-                City.SendKeys(Keys.Enter);
+            DefaultWait<IWebDriver> fluentWait = new DefaultWait<IWebDriver>(driver);
+            fluentWait.Timeout = TimeSpan.FromSeconds(10);
+            fluentWait.PollingInterval = TimeSpan.FromMilliseconds(100);
+            fluentWait.IgnoreExceptionTypes(typeof(NoSuchElementException));
+            fluentWait.Message = "Element not found";
+
+            City.Click();
+            //Thread.Sleep(1000);
+
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromMicroseconds(1000));
+            City.Clear();
+            //WebDriverWait wait1= new WebDriverWait(driver, TimeSpan.FromMicroseconds(1000));
+            City.SendKeys(city);
+
+            //fluentWait.Until(c => City.Displayed);
+            WebDriverWait wait1 = new WebDriverWait(driver, TimeSpan.FromMicroseconds(1000));
+
+            City.SendKeys(Keys.Enter);
            
         }
 
