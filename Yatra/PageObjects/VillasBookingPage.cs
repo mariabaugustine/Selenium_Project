@@ -19,7 +19,7 @@ namespace Yatra.PageObjects
             this.driver = driver??throw new ArgumentException(nameof(driver));
             PageFactory.InitElements(driver, this);
         }
-        [FindsBy(How =How.Id,Using =("BE_hotel_destination_city"))]
+        [FindsBy(How =How.XPath,Using =("//*[@id=\"BE_hotel_destination_city\"]"))]
         public IWebElement City { get; set; }
 
         [FindsBy(How=How.XPath,Using = "//input[@id='BE_hotel_checkin_date']//following::p[1]")]
@@ -44,14 +44,16 @@ namespace Yatra.PageObjects
 
             City.Click();
             Thread.Sleep(1000);
-
-           // WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromMicroseconds(1000));
+            
             City.Clear();
-            //WebDriverWait wait1= new WebDriverWait(driver, TimeSpan.FromMicroseconds(1500));
+            //Thread.Sleep(1200);
+            fluentWait.Equals(City.Text == null);
             City.SendKeys(city);
+            
+            
 
             fluentWait.Until(c => City.Displayed);
-            //WebDriverWait wait2 = new WebDriverWait(driver, TimeSpan.FromMicroseconds(1200));
+            //WebDriverWait wait2 = new WebDriverWait(driver, TimeSpan.FromMilliseconds(1000));
 
             City.SendKeys(Keys.Enter);
            

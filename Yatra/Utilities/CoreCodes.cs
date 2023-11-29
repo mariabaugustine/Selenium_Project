@@ -109,7 +109,7 @@ namespace Yatra.Utilities
         public static void ScrollIntoView(IWebDriver driver, IWebElement element)
         {
             IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
-            js.ExecuteScript("arguments[0].scrollIntoView(true);", element);
+            js.ExecuteScript("arguments[0].scrollIntoView(true);",element);
         }
 
         protected void LogTestResult(string testName, string result, string errorMessage = null)
