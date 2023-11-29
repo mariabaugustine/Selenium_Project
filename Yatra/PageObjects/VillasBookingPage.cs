@@ -20,7 +20,7 @@ namespace Yatra.PageObjects
             this.driver = driver??throw new ArgumentException(nameof(driver));
             PageFactory.InitElements(driver, this);
         }
-        [FindsBy(How =How.XPath,Using =("//*[@id=\"BE_hotel_destination_city\"]"))]
+        [FindsBy(How =How.Id,Using =("BE_hotel_destination_city"))]
         public IWebElement City { get; set; }
 
         [FindsBy(How=How.XPath,Using = "//input[@id='BE_hotel_checkin_date']//following::p[1]")]
@@ -28,7 +28,7 @@ namespace Yatra.PageObjects
 
         [FindsBy(How=How.XPath,Using = "//input[@id='BE_hotel_checkout_date']//following::p[1]")]
         public IWebElement CheckOutPara{ get; set;}
-        [FindsBy(How = How.Id, Using = "BE_hotel_checkout_date")]
+        [FindsBy(How = How.Id, Using = "BE_hotel_checkin_date")]
         public IWebElement CheckIN { get; set; }
 
         [FindsBy(How = How.Id, Using = "BE_hotel_checkout_date")]
@@ -48,20 +48,27 @@ namespace Yatra.PageObjects
             fluentWait.PollingInterval = TimeSpan.FromMilliseconds(100);
             fluentWait.IgnoreExceptionTypes(typeof(NoSuchElementException));
             fluentWait.Message = "Element not found";
-
+            
+            //driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(3);
             City.Clear();
             Thread.Sleep(4000);
+            //driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(30);
 
             City.Click();
             Thread.Sleep(1000);
-            
-//            fluentWait.Equals(City.Text == null);
+
+            //            fluentWait.Equals(City.Text == null);
+           // driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(40);
             City.SendKeys(city);
-            
-            
+
+
             Thread.Sleep(5000);
             //fluentWait.Until(c => City.Displayed);
             //WebDriverWait wait2 = new WebDriverWait(driver, TimeSpan.FromMilliseconds(1000));
+            //driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(4);
+           // WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(30));
+            //wait.Until(driver =>City.GetAttribute("value") == "New Delhi");
+
 
             City.SendKeys(Keys.Enter);
            

@@ -20,7 +20,8 @@ namespace Yatra.PageObjects
             this.driver = driver;
             PageFactory.InitElements(driver, this);
         }
-        [FindsBy(How =How.XPath,Using = "(//label[@class='filter-label ng-binding'])[8]")]
+        [FindsBy(How =How.XPath,Using = "(//label[@class='filter-label ng-binding'])[6]")]
+        
 
         public IWebElement FilterByPropertyType { get; set; }
         public FilterResultPage ClickFilterPropertyType()

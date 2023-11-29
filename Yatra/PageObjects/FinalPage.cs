@@ -17,5 +17,17 @@ namespace Yatra.PageObjects
             this.driver = driver;
             PageFactory.InitElements(driver, this);
         }
+        [FindsBy(How=How.Id,Using =("paytm"))]
+         public IWebElement Paytm {  get; set; }
+        [FindsBy(How=How.Id,Using = "payNow")]
+        public IWebElement PayNow { get; set; }
+        public void PaytmClick()
+        {
+            Paytm.Click();
+        }
+        public void PayNowClick()
+        { 
+            PayNow.Click();
+        }
     }
 }

@@ -17,7 +17,10 @@ namespace Yatra.PageObjects
             this.driver = driver;
             PageFactory.InitElements(driver, this);
         }
-        [FindsBy(How=How.XPath,Using = "//*[@id=\"roomWrapper0001823719\"]/div[2]/div[5]/button")]
+        //[FindsBy(How=How.XPath,Using = "//*[@id=\"roomWrapper0001823719\"]/div[2]/div[5]/button")]
+        //[FindsBy(How =How.XPath,Using = " //*[@id=\"roomWrapper0001823650\"]/div[2]/div[5]/button")]
+        [FindsBy(How = How.XPath, Using = "//*[@id=\"roomWrapper0001823691\"]/div[2]/div[5]/button")]
+
         public IWebElement BookNowButton { get; set; }
 
         public ConfirmationPage ClickBookNowButton()

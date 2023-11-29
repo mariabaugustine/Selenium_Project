@@ -30,7 +30,9 @@ namespace Yatra.TestScripts
                 driver.Navigate().GoToUrl("https://www.yatra.com/");
             }
             var villasPage=yatraHP.ClickVillasIcon();
-            Thread.Sleep(1000);
+          
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
+            //Thread.Sleep(1000);
             Assert.AreEqual("https://www.yatra.com/homestays", driver.Url);
 
 
@@ -47,7 +49,7 @@ namespace Yatra.TestScripts
                 //string? city = excelData?.City;
                 //Console.WriteLine($"City: {city}");
                 villasPage.TypeCity(excelData.City);
-                Thread.Sleep(1000);
+                //Thread.Sleep(1000);
                 //fluentWait.Timeout=TimeSpan.FromMilliseconds(1000);
                 
 
@@ -63,10 +65,10 @@ namespace Yatra.TestScripts
             }
 
 
-            Thread.Sleep(1000);
+            //Thread.Sleep(1000);
             villasPage.ClickAddButton();
             villasPage.ClickRemoveAdultButton();
-            Thread.Sleep(5000);
+            //Thread.Sleep(5000);
 
             Console.WriteLine("CheckOut:"+driver.FindElement(By.Id("BE_hotel_checkout_date")).Text);
             Console.WriteLine("CheckIn" +driver.FindElement(By.Id("BE_hotel_checkin_date")).Text);
@@ -74,34 +76,51 @@ namespace Yatra.TestScripts
 
             var searchResultPage=villasPage.clickSearchVillas();
             Assert.That(driver.Url.Contains("homestay-search"));
-            Thread.Sleep(1000);
-            var filterPage=searchResultPage.ClickFilterPropertyType();
-            Thread.Sleep(5000);
-            filterPage.ClickChooseRoom();
             //Thread.Sleep(1000);
 
+
+
+
+            var filterPage=searchResultPage.ClickFilterPropertyType();
+            //Thread.Sleep(5000);
+            string location = driver.FindElement(By.XPath("//*[@id=\"result0\"]/div[1]/div[1]/ul[1]/li[1]/p/span")).Text;
+            //Assert.That(location.Contains("Connaught Place"));
+            filterPage.ClickChooseRoom();
+           
+            //Thread.Sleep(1000);
+
+            
+            
             List<string> nextWindow = driver.WindowHandles.ToList();
             driver.SwitchTo().Window(nextWindow[1]);
-           var bookingpage=new BookingPage(driver);
-            Thread.Sleep(5000);
+            var bookingpage=new BookingPage(driver);
+            // Thread.Sleep(5000);
+           // ScrollIntoView(driver, driver.FindElement(By.XPath("//*[@id=\"roomWrapper0001823650\"]/div[2]/div[5]/button")));
             var confirmation=bookingpage.ClickBookNowButton();
-            Thread.Sleep(3000);
+           // Assert.That(driver.Url.Contains("review"));
+            //Thread.Sleep(3000);
+
+
             string personDatasheet ="TravellerData";
             travellerDataList=PersonUtilities.ReadExcelData(excelFilePath, personDatasheet);
             ScrollIntoView(driver, driver.FindElement(By.Id("traveller-dom")));
-            Thread.Sleep(3000);
+            //Thread.Sleep(3000);
             foreach (var data in travellerDataList)
             {
                 confirmation.TypeEmail(data.Email);
-                Thread.Sleep(1000);
+                //Thread.Sleep(1000);
                 confirmation.TypeMobile(data.Mobile);
                 confirmation.TypeFirstName(data.Fname);
                 confirmation.TypeLastName(data.Lname);
             }
             confirmation.TypeTitle();
-            Thread.Sleep(5000);
+           // Thread.Sleep(5000);
             var lastPage = confirmation.ClickSubmit();
-            Thread.Sleep(3000);
+            //Thread.Sleep(3000);
+
+            lastPage.PaytmClick();
+            lastPage.PayNowClick();
+            Thread.Sleep(1000);
         
         }  
     }
