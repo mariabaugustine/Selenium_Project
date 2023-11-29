@@ -16,6 +16,7 @@ namespace Yatra.PageObjects
         public ConfirmationPage(IWebDriver driver)
         {
             this.driver = driver;
+            PageFactory.InitElements(driver, this);
         }
         [FindsBy(How =How.XPath,Using = "//*[@id=\"additionalContactEmail\"]")]
         public IWebElement EmailType {  get; set; }
@@ -31,6 +32,8 @@ namespace Yatra.PageObjects
         [FindsBy(How = How.Id, Using = "additionalContactMobile")]
 
         public IWebElement Mobile { get; set; }
+        [FindsBy(How =How.XPath,Using = "//*[@id=\"traveller-dom\"]/form/div[4]/button[1]")]
+        public IWebElement FinalSubmit { get; set; }
 
         public void TypeEmail(string email)
         {
@@ -52,6 +55,11 @@ namespace Yatra.PageObjects
         public void TypeMobile(string mobil)
         {
             Mobile.SendKeys(mobil);
+        }
+        public FinalPage ClickSubmit()
+        {
+            FinalSubmit.Click();
+            return new FinalPage(driver);
         }
 
 

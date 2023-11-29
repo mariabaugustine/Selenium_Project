@@ -90,7 +90,9 @@ namespace Yatra.TestScripts
                 confirmation.TypeLastName(data.Lname);
             }
             confirmation.TypeTitle();
-            Thread.Sleep(1000);
+            Thread.Sleep(5000);
+            var lastPage = confirmation.ClickSubmit();
+            Thread.Sleep(3000);
         
         }  
     }
