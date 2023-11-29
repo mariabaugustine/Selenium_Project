@@ -29,7 +29,7 @@ namespace Yatra.TestScripts
             {
                 driver.Navigate().GoToUrl("https://www.yatra.com/");
             }
-            var VillasPage=yatraHP.ClickVillasIcon();
+            var villasPage=yatraHP.ClickVillasIcon();
             Thread.Sleep(1000);
             Assert.AreEqual("https://www.yatra.com/homestays", driver.Url);
 
@@ -44,9 +44,9 @@ namespace Yatra.TestScripts
             foreach (var excelData in searchDataList)
             {
 
-                string? city = excelData?.City;
-                Console.WriteLine($"City: {city}");
-                VillasPage.TypeCity(excelData.City);
+                //string? city = excelData?.City;
+                //Console.WriteLine($"City: {city}");
+                villasPage.TypeCity(excelData.City);
                 Thread.Sleep(1000);
                 //fluentWait.Timeout=TimeSpan.FromMilliseconds(1000);
                 
@@ -54,16 +54,25 @@ namespace Yatra.TestScripts
                 IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
 
 
-                js.ExecuteScript("arguments[0].innerText= \"" + excelData.CheckIn + "\";", VillasPage.CheckIN);
-                js.ExecuteScript("arguments[0].innerText= \"" + excelData.CheckOut + "\";", VillasPage.checkOut);
+                js.ExecuteScript("arguments[0].innerText= \"" + excelData.CheckIn + "\";", villasPage.CheckIN);
+                js.ExecuteScript("arguments[0].innerText= \"" + excelData.CheckOut + "\";", villasPage.CheckOut);
+                js.ExecuteScript("arguments[0].innerText= \"" + excelData.CheckIn + "\";", villasPage.CheckINPara);
+                js.ExecuteScript("arguments[0].innerText= \"" + excelData.CheckOut + "\";", villasPage.CheckOutPara);
 
 
             }
 
-            VillasPage.ClickAddButton();
-            VillasPage.ClickRemoveAdultButton();
-            //fluentWait.Timeout = TimeSpan.FromMilliseconds(1000);
-            var searchResultPage=VillasPage.clickSearchVillas();
+
+            Thread.Sleep(1000);
+            villasPage.ClickAddButton();
+            villasPage.ClickRemoveAdultButton();
+            Thread.Sleep(5000);
+
+            Console.WriteLine("CheckOut:"+driver.FindElement(By.Id("BE_hotel_checkout_date")).Text);
+            Console.WriteLine("CheckIn" +driver.FindElement(By.Id("BE_hotel_checkin_date")).Text);
+            Console.WriteLine("City"+driver.FindElement(By.Id("BE_hotel_destination_city")).Text);
+
+            var searchResultPage=villasPage.clickSearchVillas();
             Assert.That(driver.Url.Contains("homestay-search"));
             Thread.Sleep(1000);
             var filterPage=searchResultPage.ClickFilterPropertyType();

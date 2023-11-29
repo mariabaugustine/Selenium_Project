@@ -53,7 +53,7 @@ namespace Yatra.Utilities
         }
         static string GetValueOrDefault(DataRow row, string columnName)
         {
-            Console.WriteLine(row + "" + columnName);
+            //Console.WriteLine(row + "" + columnName);
             return row.Table.Columns.Contains(columnName) ?
                 row[columnName]?.ToString() : null;
         }
@@ -106,7 +106,7 @@ namespace Yatra.Utilities
         }
         static string GetValueOrDefault(DataRow row, string columnName)
         {
-            Console.WriteLine(row + "" + columnName);
+           // Console.WriteLine(row + "" + columnName);
             return row.Table.Columns.Contains(columnName) ?
                 row[columnName]?.ToString() : null;
         }

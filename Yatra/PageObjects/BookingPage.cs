@@ -22,6 +22,7 @@ namespace Yatra.PageObjects
 
         public ConfirmationPage ClickBookNowButton()
         {
+            Thread.Sleep(1000);
             BookNowButton.Click();
             return new ConfirmationPage(driver);
         }
