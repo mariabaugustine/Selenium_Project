@@ -14,7 +14,8 @@ namespace Yatra.TestScripts
     internal class VillasBookingTests:CoreCodes
     {
         [Test]
-        public void TestvillasBooking()
+        [TestCase("Friday, 8 December 2023","Monday, 18 December 2023")]
+        public void TestvillasBooking(string date1,string date2)
         {
 
             List<SearchData> searchDataList;
@@ -49,17 +50,23 @@ namespace Yatra.TestScripts
                 //string? city = excelData?.City;
                 //Console.WriteLine($"City: {city}");
                 villasPage.TypeCity(excelData.City);
-                //Thread.Sleep(1000);
+                Thread.Sleep(3000);
+                villasPage.LabelClickedFunction();
+                Thread.Sleep(4000);
+                villasPage.GetCheckInDateClicked(date1);
+                Thread.Sleep(4000);
+                villasPage.GetCheckOutClicked(date2);
+
                 //fluentWait.Timeout=TimeSpan.FromMilliseconds(1000);
                 
 
-                IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
+                //IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
 
 
-                js.ExecuteScript("arguments[0].innerText= \"" + excelData.CheckIn + "\";", villasPage.CheckIN);
-                js.ExecuteScript("arguments[0].innerText= \"" + excelData.CheckOut + "\";", villasPage.CheckOut);
-                js.ExecuteScript("arguments[0].innerText= \"" + excelData.CheckIn + "\";", villasPage.CheckINPara);
-                js.ExecuteScript("arguments[0].innerText= \"" + excelData.CheckOut + "\";", villasPage.CheckOutPara);
+                //js.ExecuteScript("arguments[0].innerText= \"" + excelData.CheckIn + "\";", villasPage.CheckIN);
+                //js.ExecuteScript("arguments[0].innerText= \"" + excelData.CheckOut + "\";", villasPage.CheckOut);
+                //js.ExecuteScript("arguments[0].innerText= \"" + excelData.CheckIn + "\";", villasPage.CheckINPara);
+                //js.ExecuteScript("arguments[0].innerText= \"" + excelData.CheckOut + "\";", villasPage.CheckOutPara);
 
 
             }
@@ -120,7 +127,7 @@ namespace Yatra.TestScripts
 
             lastPage.PaytmClick();
             lastPage.PayNowClick();
-            Thread.Sleep(1000);
+            Thread.Sleep(3000);
         
         }  
     }
