@@ -29,6 +29,10 @@ namespace Yatra.TestScripts
             ScrollIntoView(driver, driver.FindElement(By.XPath("//a[text()='Explore Jobs Opening']")));
             var careermain=careerpage.ClickCareerButton();
             Assert.That(driver.Url.Contains("job-portal"));
+
+            var joblist = careermain.ClickChooseCourse();
+            careermain.ClickApplyButton();
+            Thread.Sleep(10000);
         }
     }
 }

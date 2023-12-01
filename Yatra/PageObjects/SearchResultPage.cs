@@ -20,13 +20,14 @@ namespace Yatra.PageObjects
             this.driver = driver;
             PageFactory.InitElements(driver, this);
         }
-        [FindsBy(How =How.XPath,Using = "(//label[@class='filter-label ng-binding'])[8]")]
-        
+        //[FindsBy(How =How.XPath,Using = "(//label[@class='filter-label ng-binding'])[8]")]
 
+        [FindsBy(How =How.Id,Using = "hotelFilterInput")]
         public IWebElement FilterByPropertyType { get; set; }
-        public FilterResultPage ClickFilterPropertyType()
+        public FilterResultPage ClickFilterPropertyType(string name)
         {
-            FilterByPropertyType.Click();
+            FilterByPropertyType.SendKeys(name);
+            FilterByPropertyType.SendKeys(Keys.Enter);
 
             return new FilterResultPage(driver);
         }

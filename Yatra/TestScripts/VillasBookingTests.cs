@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Yatra.PageObjects;
 using Yatra.Utilities;
 using static System.Runtime.InteropServices.JavaScript.JSType;
+using AventStack.ExtentReports.Gherkin.Model;
 
 namespace Yatra.TestScripts
 {
@@ -49,6 +50,7 @@ namespace Yatra.TestScripts
 
                 //string? city = excelData?.City;
                 //Console.WriteLine($"City: {city}");
+               // villasPage.ClickCity();
                 villasPage.TypeCity(excelData.City);
                 Thread.Sleep(3000);
                 villasPage.LabelClickedFunction();
@@ -86,13 +88,13 @@ namespace Yatra.TestScripts
             //Thread.Sleep(1000);
 
 
+            var filter = searchResultPage.ClickFilterPropertyType("Green Villa");
 
-
-            var filterPage=searchResultPage.ClickFilterPropertyType();
+             filter.ClickChooseRoom();
             //Thread.Sleep(5000);
             string location = driver.FindElement(By.XPath("//*[@id=\"result0\"]/div[1]/div[1]/ul[1]/li[1]/p/span")).Text;
             //Assert.That(location.Contains("Connaught Place"));
-            filterPage.ClickChooseRoom();
+            //filterPage.ClickChooseRoom();
            
             //Thread.Sleep(1000);
 

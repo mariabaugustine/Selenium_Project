@@ -18,6 +18,19 @@ namespace Yatra.PageObjects
             PageFactory.InitElements(driver, this);
         }
 
-        
+        [FindsBy(How =How.XPath,Using = "//div[@class='job-tab']//child::li[3]")]
+        private IWebElement ChooseCourse { get; set; }
+        [FindsBy(How =How.XPath,Using = "//*[@id=\"Technology-Bangalore\"]/div[1]/span/a")]
+        private IWebElement ClickApply { get; set; }
+
+        public SearchJob ClickChooseCourse()
+        {
+            ChooseCourse.Click();
+            return new SearchJob(driver);
+        }
+        public void ClickApplyButton()
+        {
+            ClickApply.Click();
+        }
     }
 }

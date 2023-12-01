@@ -71,13 +71,18 @@ namespace Yatra.PageObjects
         [FindsBy(How =How.Id,Using = "BE_hotel_htsearch_btn")]
         private IWebElement searchvillasButton { get; set; }
 
+        //public void ClickCity()
+        //{
+        //    City.Click();
+        //}
+
         public void TypeCity(string city)
         {
-            DefaultWait<IWebDriver> fluentWait = new DefaultWait<IWebDriver>(driver);
-            fluentWait.Timeout = TimeSpan.FromSeconds(10);
-            fluentWait.PollingInterval = TimeSpan.FromMilliseconds(100);
-            fluentWait.IgnoreExceptionTypes(typeof(NoSuchElementException));
-            fluentWait.Message = "Element not found";
+            //DefaultWait<IWebDriver> fluentWait = new DefaultWait<IWebDriver>(driver);
+            //fluentWait.Timeout = TimeSpan.FromSeconds(10);
+            //fluentWait.PollingInterval = TimeSpan.FromMilliseconds(100);
+            //fluentWait.IgnoreExceptionTypes(typeof(NoSuchElementException));
+            //fluentWait.Message = "Element not found";
             
             //driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(3);
             City.Clear();
@@ -104,30 +109,7 @@ namespace Yatra.PageObjects
            
         }
 
-        //public void CheckInInput(string date)
-        //{
-        //    CheckIN?.SendKeys(date);
-        //    //CheckIN?.SendKeys(Keys.Enter);
-            
-        //}
-        //public void CheckOutInput(string date)
-        //{
-        //    CheckOut?.SendKeys(date);
-        //    //CheckOut?.SendKeys(Keys.Enter);
-            
-        //}
-        //public void CheckOutInputLabel(string date)
-        //{
-        //    CheckOutPara?.SendKeys(date);
-        //    //CheckOut?.SendKeys(Keys.Enter);
-
-        //}
-        //public void CheckInInputLabel(string date)
-        //{
-        //    CheckINPara?.SendKeys(date);
-        //    //CheckOut?.SendKeys(Keys.Enter);
-
-        //}
+       
         public void ClickAddButton()
         {
             AddButton.Click();
