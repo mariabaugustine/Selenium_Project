@@ -19,6 +19,14 @@ namespace Yatra.PageObjects
         }
         [FindsBy(How =How.Id,Using = "booking_engine_homestays")]
         private IWebElement villasIcon {  get; set; }
+
+        [FindsBy(How=How.XPath,Using = "//div//a[@class='logo']")]
+        private IWebElement Logo {  get; set; }
+
+        public void LogoCheck()
+        {
+            Logo.Click();
+        }
         public VillasBookingPage ClickVillasIcon()
         {
             villasIcon.Click();

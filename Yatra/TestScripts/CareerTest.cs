@@ -13,7 +13,7 @@ namespace Yatra.TestScripts
 {
     internal class CareerTest:CoreCodes
     {
-        [Test]
+        [Test,Category("E2E")]
        public void CareerTesting()
         {
             List<CareerData> CareerList;
