@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using SeleniumExtras.PageObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,9 @@ namespace Yatra.PageObjects
         public SearchJob(IWebDriver driver)
         {
             this.driver = driver;
-            //pag
+            PageFactory.InitElements(driver, this);
+            
         }
+        private IWebElement Name { get; set; }
     }
 }

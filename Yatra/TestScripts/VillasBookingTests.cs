@@ -146,15 +146,7 @@ namespace Yatra.TestScripts
             // Thread.Sleep(5000);
            // ScrollIntoView(driver, driver.FindElement(By.XPath("//*[@id=\"roomWrapper0001823650\"]/div[2]/div[5]/button")));
             var confirmation=bookingpage.ClickBookNowButton();
-            try
-            {
-                Log.Information("Booked successfully");
-                Assert.That(driver.Url.Contains("review"));
-            }
-            catch (AssertionException ex)
-            {
-            }
-            //Thread.Sleep(3000);
+           Thread.Sleep(3000);
 
 
             string personDatasheet ="TravellerData";
