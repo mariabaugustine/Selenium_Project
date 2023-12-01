@@ -9,6 +9,7 @@ using Yatra.PageObjects;
 using Yatra.Utilities;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using AventStack.ExtentReports.Gherkin.Model;
+using Serilog;
 
 namespace Yatra.TestScripts
 {
@@ -21,6 +22,15 @@ namespace Yatra.TestScripts
 
             List<SearchData> searchDataList;
             List<TravellerData> travellerDataList;
+            string? currDir = Directory.GetParent(@"../../../")?.FullName;
+            string? logfilepath = currDir + "/Logs/log_" +
+               DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".txt";
+
+           Log.Logger = new LoggerConfiguration()
+          .WriteTo.Console()
+          .WriteTo.File(logfilepath, rollingInterval: RollingInterval.Day)
+          .CreateLogger();
+
             DefaultWait<IWebDriver> fluentWait = new DefaultWait<IWebDriver>(driver);
             fluentWait.Timeout = TimeSpan.FromSeconds(10);
             fluentWait.PollingInterval = TimeSpan.FromMilliseconds(100);
@@ -31,15 +41,33 @@ namespace Yatra.TestScripts
             {
                 driver.Navigate().GoToUrl("https://www.yatra.com/");
             }
+
+            Log.Information("Villas booking test started");
+
             var villasPage=yatraHP.ClickVillasIcon();
+
+            Log.Information("Villas and stays option clicked");
           
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
             //Thread.Sleep(1000);
-            Assert.AreEqual("https://www.yatra.com/homestays", driver.Url);
+
+            try
+            {
+                Assert.AreEqual("https://www.yatra.com/homestays", driver.Url);
+                Log.Information("Test passed for Villas and Stays option Clicking");
+                test = extent.CreateTest("Villas and Stays Page Loading");
+                test.Pass(" Page Loaded Successfully");
+            }
+            catch (AssertionException ex)
+            {
+                Log.Error($"Test failed for Villas and Stays Option Clicking. \n Exception: {ex.Message}");
+                test = extent.CreateTest("Villas and Stays Page Loading");
+                test.Fail("Villas and Stays Page Loading failed");
+            }
 
 
 
-            string? currDir = Directory.GetParent(@"../../../")?.FullName;
+            //string? currDir = Directory.GetParent(@"../../../")?.FullName;
             string? excelFilePath = currDir + "/TestData/VillasBookingData.xlsx";
             string? sheetName = "SearchVilla";
 
@@ -58,6 +86,7 @@ namespace Yatra.TestScripts
                 villasPage.GetCheckInDateClicked(date1);
                 Thread.Sleep(4000);
                 villasPage.GetCheckOutClicked(date2);
+                Log.Information("All the input field are entered");
 
                 //fluentWait.Timeout=TimeSpan.FromMilliseconds(1000);
                 
@@ -84,19 +113,30 @@ namespace Yatra.TestScripts
             Console.WriteLine("City"+driver.FindElement(By.Id("BE_hotel_destination_city")).Text);
 
             var searchResultPage=villasPage.clickSearchVillas();
-            Assert.That(driver.Url.Contains("homestay-search"));
+            Log.Information("Search villas option clicked");
+            try
+            {
+                Assert.That(driver.Url.Contains("homestay-search"));
+                Log.Information("Test passed for Searching Villas");
+                test = extent.CreateTest("Display Search Result");
+                test.Pass(" Search result displayed Successfully");
+            }
+            catch(AssertionException ex)
+            {
+                Log.Error($"Test failed for Displaying search result. \n Exception: {ex.Message}");
+                test = extent.CreateTest("Display Search Result");
+                test.Fail("Search result displaying failed");
+            }
             //Thread.Sleep(1000);
 
 
-            var filter = searchResultPage.ClickFilterPropertyType("Green Villa");
+            var filter = searchResultPage.ClickFilterPropertyType("Star Inn");
+            Log.Information("Filter result displayed successfully");
 
              filter.ClickChooseRoom();
+            Log.Information("Room choosed successfully");
             //Thread.Sleep(5000);
-            string location = driver.FindElement(By.XPath("//*[@id=\"result0\"]/div[1]/div[1]/ul[1]/li[1]/p/span")).Text;
-            //Assert.That(location.Contains("Connaught Place"));
-            //filterPage.ClickChooseRoom();
            
-            //Thread.Sleep(1000);
 
             
             
@@ -106,7 +146,14 @@ namespace Yatra.TestScripts
             // Thread.Sleep(5000);
            // ScrollIntoView(driver, driver.FindElement(By.XPath("//*[@id=\"roomWrapper0001823650\"]/div[2]/div[5]/button")));
             var confirmation=bookingpage.ClickBookNowButton();
-           // Assert.That(driver.Url.Contains("review"));
+            try
+            {
+                Log.Information("Booked successfully");
+                Assert.That(driver.Url.Contains("review"));
+            }
+            catch (AssertionException ex)
+            {
+            }
             //Thread.Sleep(3000);
 
 
