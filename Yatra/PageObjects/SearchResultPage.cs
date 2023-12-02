@@ -23,7 +23,7 @@ namespace Yatra.PageObjects
         //[FindsBy(How =How.XPath,Using = "(//label[@class='filter-label ng-binding'])[8]")]
 
         [FindsBy(How =How.Id,Using = "hotelFilterInput")]
-        public IWebElement FilterByPropertyType { get; set; }
+        private IWebElement FilterByPropertyType { get; set; }
         public FilterResultPage ClickFilterPropertyType(string name)
         {
             FilterByPropertyType.SendKeys(name);

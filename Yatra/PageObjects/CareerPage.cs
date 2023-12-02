@@ -18,7 +18,7 @@ namespace Yatra.PageObjects
             PageFactory.InitElements(driver, this);
         }
         [FindsBy(How = How.XPath, Using = "//a[text()='Explore Jobs Opening']")]
-        public IWebElement CareerButton { get; set; }
+        private  IWebElement CareerButton { get; set; }
 
 
         public CareerMainPage ClickCareerButton()

@@ -18,7 +18,7 @@ namespace Yatra.PageObjects
             PageFactory.InitElements(driver, this);
         }
         [FindsBy(How=How.XPath,Using = "//a[span[text()='Careers']]")] 
-        public IWebElement CareerLink { get; set; }
+        private IWebElement CareerLink { get; set; }
         public CareerPage ClickCareers()
         {
             CareerLink.Click();

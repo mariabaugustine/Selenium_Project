@@ -19,12 +19,12 @@ namespace Yatra.PageObjects
         }
 
         //[FindsBy(How = How.XPath, Using = "//*[@id=\"roomWrapper0001825107\"]/div[2]/div[5]/button")]
-        [FindsBy(How =How.XPath,Using = "//*[@id=\"roomWrapper0001823640\"]/div[2]/div[5]/button")]
-        public IWebElement BookNowButton { get; set; }
+        [FindsBy(How =How.XPath,Using = "//*[@id=\"roomWrapper0001825107\"]/div[2]/div[5]/button")]
+        private IWebElement BookNowButton { get; set; }
 
         public ConfirmationPage ClickBookNowButton()
         {
-            Thread.Sleep(1000);
+            //Thread.Sleep(1000);
             BookNowButton.Click();
             return new ConfirmationPage(driver);
         }

@@ -35,6 +35,8 @@ namespace Yatra.TestScripts
             CareerHomePage CHP = new CareerHomePage(driver);
             ScrollIntoView(driver, driver.FindElement(By.XPath("//*[@id=\"js_yt_footer\"]/div/ul/li[3]/a/span")));
             var careerpage = CHP.ClickCareers();
+            TakeScreenShot();
+
             //Assert.That(driver.Url.Contains("career"));
 
 
@@ -43,7 +45,9 @@ namespace Yatra.TestScripts
             //Assert.That(driver.Url.Contains("job-portal"));
 
             careermain.ClickChooseCourse();
+            TakeScreenShot();
             careermain.ClickApplyButton();
+            TakeScreenShot();
             Thread.Sleep(10000);
             string? excelFilePath = currDir + "/TestData/VillasBookingData.xlsx";
             string sheetName = "Career";
@@ -57,9 +61,10 @@ namespace Yatra.TestScripts
                 string? linkedin = cdata.LinkedInUrl;
                 string? emai = cdata.EmailId;
                 careermain.ApplyJob(name, emai, phone, linkedin, city);
-                Thread.Sleep(2000);
+                //Thread.Sleep(2000);
                 
             }
+            TakeScreenShot();
             try
             {
                 string text = driver.FindElement(By.XPath("//div//h3[text()='Technology Buff? Yatra is growing']")).Text;

@@ -99,20 +99,24 @@ namespace Yatra.TestScripts
             villasPage.ClickRemoveAdultButton();
             //Thread.Sleep(5000);
 
-            Console.WriteLine("CheckOut:"+driver.FindElement(By.Id("BE_hotel_checkout_date")).Text);
-            Console.WriteLine("CheckIn" +driver.FindElement(By.Id("BE_hotel_checkin_date")).Text);
-            Console.WriteLine("City"+driver.FindElement(By.Id("BE_hotel_destination_city")).Text);
+            //Console.WriteLine("CheckOut:"+driver.FindElement(By.Id("BE_hotel_checkout_date")).Text);
+            //Console.WriteLine("CheckIn" +driver.FindElement(By.Id("BE_hotel_checkin_date")).Text);
+            //Console.WriteLine("City"+driver.FindElement(By.Id("BE_hotel_destination_city")).Text);
 
+            TakeScreenShot();
             var searchResultPage=villasPage.clickSearchVillas();
+            TakeScreenShot();
             Log.Information("Search villas option clicked");
             
             //Thread.Sleep(1000);
 
 
-            var filter = searchResultPage.ClickFilterPropertyType("Oxynt Home");
+            var filter = searchResultPage.ClickFilterPropertyType("Trendy B N B");
+            TakeScreenShot();
             Log.Information("Filter result displayed successfully");
 
              filter.ClickChooseRoom();
+            TakeScreenShot();
             Log.Information("Room choosed successfully");
             //Thread.Sleep(5000);
            
@@ -125,6 +129,7 @@ namespace Yatra.TestScripts
             // Thread.Sleep(5000);
            // ScrollIntoView(driver, driver.FindElement(By.XPath("//*[@id=\"roomWrapper0001823650\"]/div[2]/div[5]/button")));
             var confirmation=bookingpage.ClickBookNowButton();
+            TakeScreenShot();
            Thread.Sleep(3000);
 
 
@@ -143,10 +148,13 @@ namespace Yatra.TestScripts
             confirmation.TypeTitle();
            // Thread.Sleep(5000);
             var lastPage = confirmation.ClickSubmit();
+            TakeScreenShot();
             //Thread.Sleep(3000);
 
             lastPage.PaytmClick();
+            TakeScreenShot();
             lastPage.PayNowClick();
+            TakeScreenShot();
             Log.Information("Room booked successfully");
             try
             {

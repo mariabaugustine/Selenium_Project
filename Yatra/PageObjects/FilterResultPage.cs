@@ -18,11 +18,12 @@ namespace Yatra.PageObjects
             PageFactory.InitElements(driver, this);
         }
         [FindsBy(How =How.XPath,Using = "//*[@id=\"result0\"]/div[1]/div[2]/div/span")]
-        public IWebElement ChooseRoomButton {  get; set; }
-
+        private IWebElement ChooseRoomButton {  get; set; }
+        
         public void ClickChooseRoom()
         {
-        ChooseRoomButton.Click();
+            Thread.Sleep(2000);//wait not working
+            ChooseRoomButton.Click();
         }
     }
 }

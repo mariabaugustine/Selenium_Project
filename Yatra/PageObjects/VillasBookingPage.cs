@@ -38,7 +38,7 @@ namespace Yatra.PageObjects
         }
         IWebElement? GetcheckIn(string date)
         {
-            return driver.FindElement(By.XPath("//tbody[@class='BE_hotel_checkin_date']//child::td[@title='Friday, 8 December 2023']"));
+            return driver.FindElement(By.XPath("//tbody[@class='BE_hotel_checkin_date']//child::td[@title='Tuesday, 5 December 2023']"));
         }
         public string? GetCheckInText(string date)
         {
@@ -50,7 +50,7 @@ namespace Yatra.PageObjects
         }
         IWebElement? GetchekOut(string date)
         {
-            return driver.FindElement(By.XPath("//tbody[@class='BE_hotel_checkout_date']//child::td[@title='Monday, 18 December 2023']"));
+            return driver.FindElement(By.XPath("//tbody[@class='BE_hotel_checkout_date']//child::td[@title='Friday, 8 December 2023']"));
         }
         public string? GetCheckOutText(string checkoutdate)
         {
@@ -86,18 +86,18 @@ namespace Yatra.PageObjects
             
             //driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(3);
             City.Clear();
-            Thread.Sleep(4000);
+            Thread.Sleep(4000);//waits not working
             //driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(30);
 
             City.Click();
-            Thread.Sleep(1000);
+            Thread.Sleep(1000);//waits not working
 
             //            fluentWait.Equals(City.Text == null);
            // driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(40);
             City.SendKeys(city);
 
 
-            Thread.Sleep(5000);
+            Thread.Sleep(5000);//waits not working
             //fluentWait.Until(c => City.Displayed);
             //WebDriverWait wait2 = new WebDriverWait(driver, TimeSpan.FromMilliseconds(1000));
             //driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(4);

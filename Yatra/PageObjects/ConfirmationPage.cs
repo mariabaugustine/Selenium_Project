@@ -19,21 +19,21 @@ namespace Yatra.PageObjects
             PageFactory.InitElements(driver, this);
         }
         [FindsBy(How =How.XPath,Using = "//*[@id=\"additionalContactEmail\"]")]
-        public IWebElement EmailType {  get; set; }
+        private IWebElement EmailType {  get; set; }
 
         [FindsBy(How=How.XPath,Using = "//*[@id=\"paxNum0\"]/div[2]/div[1]/span/select/option[4]")]
-        public IWebElement Title { get; set; }
+        private IWebElement Title { get; set; }
         [FindsBy(How =How.Id,Using = "travellerf0")]
-        public IWebElement FirstName { get; set; }
+        private IWebElement FirstName { get; set; }
 
         [FindsBy(How = How.Id, Using = "travellerl0")]
-        public IWebElement LastName { get; set; }
+        private IWebElement LastName { get; set; }
 
         [FindsBy(How = How.Id, Using = "additionalContactMobile")]
 
-        public IWebElement Mobile { get; set; }
+        private IWebElement Mobile { get; set; }
         [FindsBy(How =How.XPath,Using = "//*[@id=\"traveller-dom\"]/form/div[4]/button[1]")]
-        public IWebElement FinalSubmit { get; set; }
+        private IWebElement FinalSubmit { get; set; }
 
         public void TypeEmail(string email)
         {
